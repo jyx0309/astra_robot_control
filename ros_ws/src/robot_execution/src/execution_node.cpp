@@ -54,7 +54,7 @@ public:
   for(int i=0;i<3;++i) if(!std::isfinite(bounds_[2*i])||!std::isfinite(bounds_[2*i+1])||bounds_[2*i]>=bounds_[2*i+1]) throw std::runtime_error("工作空间边界无效");
   for(double v:{pose_scale_,grip_scale_,max_step_,max_angle_,opening_max_,gripper_tolerance_,force_max_,speed_,mock_duration_})
    if(!std::isfinite(v)||v<=0) throw std::runtime_error("正值参数无效");
-  if(speed_>2.5||force_max_>20||opening_max_>0.08) throw std::runtime_error("硬件限制无效");
+  if(speed_>10.0||force_max_>20||opening_max_>0.08) throw std::runtime_error("硬件限制无效");
   pose_ = {0.3, 0., 0.3, 0., 0., 0., 1.};
   enabled_ = backend_ == "mock";
 

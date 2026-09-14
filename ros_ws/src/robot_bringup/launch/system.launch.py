@@ -32,8 +32,8 @@ def generate_launch_description():
      ),
      DeclareLaunchArgument(
          'speed_level',
-         default_value='2.0',
-         description='CARM speed level (0-2.5 in this project).',
+         default_value='2.5',
+         description='CARM speed level (0-10; use with care).',
      ),
      DeclareLaunchArgument(
          'camera',

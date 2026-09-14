@@ -70,10 +70,20 @@ ros2 launch robot_bringup system.launch.py \
   backend:=carm \
   robot_ip:=10.42.0.101 \
   hardware_config_verified:=true \
-  speed_level:=2.0
+  speed_level:=2.5
 ```
 
-`speed_level` 的 SDK 范围是 `0~10`（约 `0%~100%`），本项目为安全起见限制为不超过 `2.5`。默认值为 `2.0`；如现场确认安全，可在启动时最多调到 `2.5`。
+`speed_level` 的 SDK 范围是 `0~10`（约 `0%~100%`）。默认值为 `2.5`；如现场确认安全，可在启动时调高，最高为 `10`：
+
+```bash
+ros2 launch robot_bringup system.launch.py \
+  backend:=carm \
+  robot_ip:=10.42.0.101 \
+  hardware_config_verified:=true \
+  speed_level:=10.0
+```
+
+`10.0` 是约 `100%` 速度，只适合在确认负载、工具、工作区和控制器配置后进行受控测试；普通抓取任务建议从 `2.5` 开始。
 
 ### 终端 2：检查并人工使能
 
