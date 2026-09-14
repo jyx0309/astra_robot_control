@@ -31,6 +31,11 @@ def generate_launch_description():
          description='Explicit operator confirmation for real hardware config.',
      ),
      DeclareLaunchArgument(
+         'speed_level',
+         default_value='2.0',
+         description='CARM speed level (0-2.5 in this project).',
+     ),
+     DeclareLaunchArgument(
          'camera',
          default_value='true',
          description='Start the Insight9 observation node.',
@@ -48,6 +53,7 @@ def generate_launch_description():
                  'hardware_config_verified': LaunchConfiguration(
                      'hardware_config_verified'
                  ),
+                 'speed_level': LaunchConfiguration('speed_level'),
              },
          ],
      ),

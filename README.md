@@ -69,8 +69,11 @@ source vendor/arm_control_sdk/setup.bash
 ros2 launch robot_bringup system.launch.py \
   backend:=carm \
   robot_ip:=10.42.0.101 \
-  hardware_config_verified:=true
+  hardware_config_verified:=true \
+  speed_level:=2.0
 ```
+
+`speed_level` 的 SDK 范围是 `0~10`（约 `0%~100%`），本项目为安全起见限制为不超过 `2.5`。默认值为 `2.0`；如现场确认安全，可在启动时最多调到 `2.5`。
 
 ### 终端 2：检查并人工使能
 
