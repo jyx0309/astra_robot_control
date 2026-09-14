@@ -2,6 +2,8 @@
 ros_ws/build/
 ros_ws/install/
 ros_ws/log/
+ros_ws/vendor/**/build/
+ros_ws/vendor/**/__pycache__/
 
 # Python generated files
 __pycache__/

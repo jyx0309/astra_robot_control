@@ -1,0 +1,341 @@
+# Insight 9 SDK User Guide (Windows)
+
+## 1. Overview
+
+The Insight 9 Windows SDK provides a native Windows implementation for capturing data from three UVC cameras (RGB, grayscale, depth) and two HID devices (IMU, VIO). It also exposes camera parameter controls through the UVC extension unit.
+
+This SDK automatically discovers supported devices, starts capture threads for each stream, and delivers image, IMU, and VIO data to applications via callbacks. It supports runtime parameter changes, per-camera start/stop, and depth-to-RGB alignment helpers.
+
+## 2. Features
+
+- **Automatic UVC/HID discovery**: Detects matching devices on Windows.
+- **Multi-threaded capture**: Each stream runs in its own thread.
+- **Callback-based delivery**: Image, IMU, and VIO data are provided in real time.
+- **Camera parameter control**: Exposure, gain, brightness, contrast, gamma, hue, saturation, sharpness, white balance, and more.
+- **Per-camera control**: Start/stop/restart cameras individually.
+- **Calibration support**: Read intrinsics/extrinsics and align depth to RGB.
+- **Windows build support**: Uses Visual Studio/CMake, prebuilt FFmpeg, HIDAPI, and OpenCV.
+
+## 3. Dependencies
+
+- **OS**: Windows x64
+- **Build tools**: CMake, Visual Studio 2022/2026 (x64)
+- **Optional runtime libraries**:
+  - OpenCV (for `example.exe` display and image processing)
+  - FFmpeg prebuilt libraries in `ffmpeg-z16`
+  - HIDAPI prebuilt binary in `hidapi-prebuilt`
+
+### 3.1 OpenCV
+
+The project expects OpenCV under `third_party/opencv/build/x64/vc16`. Run `download_opencv.bat` before building if you do not already have OpenCV installed.
+
+### 3.2 FFmpeg and HIDAPI
+
+The Windows SDK ships with prebuilt FFmpeg and HIDAPI libraries:
+- `ffmpeg-z16/lib/*.lib`
+- `ffmpeg-z16/bin/*.dll`
+- `hidapi-prebuilt/lib/hidapi.lib`
+- `hidapi-prebuilt/bin/hidapi.dll`
+
+## 4. Building and Installation
+
+### 4.1 Quick build
+
+Open a Developer Command Prompt for Visual Studio and run:
+
+```bat
+cd Windows-SDK
+build.bat
+```
+
+This will create a `build` directory, configure CMake for `x64`, build the project in Release mode, and copy required DLLs next to `build\Release\example.exe`.
+
+### 4.2 Manual CMake build
+
+```bat
+cd Windows-SDK
+mkdir build
+cd build
+cmake .. -G "Visual Studio 18 2026" -A x64 -DUSE_SYSTEM_FFMPEG=OFF -DUSE_SYSTEM_HIDAPI=OFF
+cmake --build . --config Release
+```
+
+### 4.3 Output
+
+- `build\Release\example.exe`
+- `build\Release\example.pdb`
+- `build\Release\opencv_world*.dll` (copied automatically if available)
+- `build\Release\avcodec-*.dll`, `avformat-*.dll`, `avdevice-*.dll`, `avutil-*.dll`, `swscale-*.dll`, `swresample-*.dll`
+- `build\Release\hidapi.dll`
+
+## 5. API Reference
+
+Include the SDK header in your application:
+
+```c
+#include "Insight9SDK.h"
+```
+
+### 5.1 Core data structures
+
+```c
+typedef struct {
+    uint8_t cam_id;
+    uint8_t resolution;
+    uint8_t frame_rate;
+    float exposure_time;
+    float exposure_gain;
+    uint8_t auto_exposure;
+    float brightness;
+    float contrast;
+    float gamma_dark;
+    float hue;
+    float saturation;
+    uint8_t sharpness;
+    uint8_t auto_white_balance;
+    float white_balance;
+    uint8_t decimation;
+    uint8_t hardware_model;
+} camera_params;
+```
+
+```c
+typedef enum {
+    PixelFormat_Unknown,
+    PixelFormat_MJPEG,
+    PixelFormat_GREY,
+    PixelFormat_Z16,
+    PixelFormat_RGB8,
+    PixelFormat_Y8I,
+    PixelFormat_YUYV
+} PixelFormat;
+
+typedef struct {
+    int width;
+    int height;
+    int fps;
+    PixelFormat pixel_format;
+} video_config_t;
+
+typedef struct {
+    video_config_t rgb_config;
+    video_config_t gray_config;
+    video_config_t depth_config;
+} insight9_config_t;
+```
+
+Calibration structs:
+
+```c
+typedef struct { ... } camera_intrinsics;
+typedef struct { ... } camera_extrinsics;
+typedef struct { camera_intrinsics intrinsics; camera_extrinsics extrinsics; } camera_calib;
+```
+
+### 5.2 Callback types
+
+```c
+typedef void (*image_callback)(int cam_id, uint8_t *data, size_t size,
+                               int width, int height, unsigned int format,
+                               uint64_t timestamp, uint64_t right_timestamp,
+                               void *userdata);
+
+typedef void (*imu_callback)(float ax, float ay, float az,
+                             float gx, float gy, float gz,
+                             uint64_t timestamp, void *userdata);
+
+typedef void (*vio_callback)(float px, float py, float pz,
+                             float qx, float qy, float qz, float qw,
+                             uint64_t timestamp, void *userdata);
+```
+
+### 5.3 Initialization and control
+
+```c
+int insight9_receive_init_default(void);
+int insight9_receive_init(const insight9_config_t* config);
+int insight9_receive_start(void);
+int insight9_receive_stop(void);
+void insight9_receive_cleanup(void);
+```
+
+- `insight9_receive_init_default()` initializes the SDK with the built-in default stream configuration.
+- `insight9_receive_init(&config)` initializes with a custom `insight9_config_t`.
+- `insight9_receive_start()` begins capture for all cameras.
+- `insight9_receive_stop()` stops all capture threads.
+- `insight9_receive_cleanup()` frees resources.
+
+### 5.4 Per-camera control
+
+```c
+int insight9_receive_start_camera(int cam_id);
+void insight9_receive_stop_camera(int cam_id);
+int insight9_receive_restart_camera(int cam_id);
+int insight9_receive_is_camera_running(int cam_id);
+```
+
+### 5.5 Callbacks
+
+```c
+void insight9_receive_register_image_callback(image_callback cb, void *userdata);
+void insight9_receive_register_imu_callback(imu_callback cb, void *userdata);
+void insight9_receive_register_vio_callback(vio_callback cb, void *userdata);
+```
+
+Register callbacks before calling `insight9_receive_start()`.
+
+### 5.6 Utility functions
+
+```c
+const char *insight9_receive_get_video_dev(int cam_id);
+int insight9_receive_get_current_fps(int* fps);
+const char* insight9_receive_get_hardware_type(void);
+```
+
+### 5.7 Camera parameter API
+
+```c
+int insight9_receive_set_active_camera(int cam_id);
+int insight9_receive_get_active_camera(int *cam_id);
+int insight9_receive_set_camera_params(const camera_params *params);
+int insight9_receive_get_camera_params(camera_params *params);
+int insight9_receive_set_camera_params_for(int cam_id, const camera_params *params);
+int insight9_receive_get_camera_params_for(int cam_id, camera_params *params);
+int insight9_receive_reset_camera_params(int cam_id);
+void insight9_receive_print_camera_params(const camera_params *params);
+```
+
+- `set_active_camera()` controls which camera is targeted by the generic parameter APIs.
+- `set_camera_params_for()` and `get_camera_params_for()` operate on a specific camera index.
+- All settings are range-validated before being sent to the device.
+
+### 5.8 Calibration API
+
+```c
+int insight9_receive_get_camera_calib(int cam_idx, camera_calib *calib);
+void insight9_receive_print_camera_calib(const camera_calib *calib);
+int insight9_receive_align_depth_to_rgb(const uint16_t *depth,
+                                        int depth_w, int depth_h,
+                                        const camera_calib *left_calib,
+                                        const camera_calib *rgb_calib,
+                                        uint16_t *aligned_out,
+                                        int rgb_w, int rgb_h);
+```
+
+- `insight9_receive_get_camera_calib()` reads factory intrinsics/extrinsics.
+- `insight9_receive_align_depth_to_rgb()` warps left-camera depth into the RGB image plane.
+
+## 6. Usage Example
+
+This Windows SDK includes `example.cpp`, which demonstrates:
+- SDK initialization
+- callback registration
+- starting capture
+- parameter read/write
+- console Ctrl+C handling
+
+A minimal usage example:
+
+```c
+#include "Insight9SDK.h"
+#include <stdio.h>
+#include <windows.h>
+
+static volatile BOOL keep_running = TRUE;
+
+BOOL WINAPI console_handler(DWORD ctrlType) {
+    if (ctrlType == CTRL_C_EVENT || ctrlType == CTRL_BREAK_EVENT) {
+        keep_running = FALSE;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void image_cb(int cam_id, uint8_t *data, size_t size,
+              int width, int height, unsigned int format,
+              uint64_t timestamp, uint64_t right_timestamp,
+              void *userdata) {
+    printf("Image[%d] size=%zu %dx%d fmt=0x%08X ts=%llu\n",
+           cam_id, size, width, height, format, (unsigned long long)timestamp);
+}
+
+int main(void) {
+    SetConsoleCtrlHandler(console_handler, TRUE);
+
+    if (insight9_receive_init_default() != 0) {
+        fprintf(stderr, "SDK init failed\n");
+        return -1;
+    }
+
+    insight9_receive_register_image_callback(image_cb, NULL);
+
+    if (insight9_receive_start() != 0) {
+        fprintf(stderr, "SDK start failed\n");
+        insight9_receive_cleanup();
+        return -1;
+    }
+
+    printf("SDK running, press Ctrl+C to stop...\n");
+    while (keep_running) {
+        Sleep(100);
+    }
+
+    insight9_receive_stop();
+    insight9_receive_cleanup();
+    return 0;
+}
+```
+
+## 7. Important Notes
+
+- Data pointers provided in callbacks may point to internal SDK buffers that are reused. Copy any data you need to keep.
+- Callbacks are invoked from capture threads. Avoid long blocking operations inside callbacks.
+- `example.exe` depends on OpenCV DLLs, FFmpeg DLLs, and `hidapi.dll`. These are copied automatically to `build\Release` when building with the provided CMake setup.
+- If OpenCV is missing, run `download_opencv.bat` and rebuild.
+- The SDK requires Windows access to the UVC and HID devices; run the app with sufficient privileges if devices cannot be opened.
+- If `insight9_receive_init_default()` fails, call `insight9_receive_cleanup()` to release any partially initialized resources.
+
+## 8. Parameter Range Reference
+
+| Parameter | Min | Max | Notes |
+|---|---|---|---|
+| exposure_time (s) | 0.0 | 0.03 | Linear mapping |
+| exposure_gain | 1.0 | 16.0 | Linear mapping |
+| auto_exposure | 0 | 1 | Boolean |
+| brightness | 0.0 | 127.0 | Linear mapping |
+| contrast | 0.0 | 1.9 | Linear mapping |
+| gamma_dark | 1.0 | 4.0 | Linear mapping |
+| hue | 0.0 | 87.0 | Linear mapping |
+| saturation | 0.0 | 1.999 | Linear mapping |
+| sharpness | 1 | 255 | Linear mapping |
+| auto_white_balance | 0 | 1 | Boolean |
+| white_balance | 1.0 | 3.0 | Linear mapping |
+| decimation | 1 | 255 | Linear mapping |
+| hardware_model | 0 | 3 | MCU/hardware selector |
+
+## 9. Frequently Asked Questions
+
+Q: How do I build the SDK on Windows?
+A: Run `build.bat` in `Windows-SDK`, or use CMake with `-G "Visual Studio 18 2026" -A x64`.
+
+Q: Why does `example.exe` fail to start?
+A: Confirm the required DLLs are present in `build\Release`:
+- `opencv_world*.dll`
+- `avcodec-*.dll`, `avformat-*.dll`, `avdevice-*.dll`, `avutil-*.dll`, `swscale-*.dll`, `swresample-*.dll`
+- `hidapi.dll`
+
+Q: How do I set camera parameters for a specific camera?
+A: Use `insight9_receive_set_camera_params_for(cam_id, &params)` and `insight9_receive_get_camera_params_for(cam_id, &params)`.
+
+Q: How do I obtain calibration data?
+A: Call `insight9_receive_get_camera_calib()` and then `insight9_receive_print_camera_calib()` to print it.
+
+Q: Can I change FPS at runtime?
+A: Use `insight9_receive_set_camera_fps(cam_id, fps)` and restart the affected camera if needed.
+
+## 10. Changelog
+
+- v1.1 (2025-05): Added Windows SDK support, UVC extension unit camera parameter API, and calibration helpers.
+- v1.0 (2025-03): Initial release with automatic device discovery and multi-stream capture.
+
+For assistance or customization, please contact the developer.
