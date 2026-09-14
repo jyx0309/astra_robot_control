@@ -283,7 +283,11 @@ private:
     }
     if(ret<1) {
      if(g->kind!="set_gripper") {
-      stop();finish(false,"sdk_rejected","Controller rejected command");return;
+      // A command-level rejection (for example, no IK solution) does not
+      // imply a hardware fault. Return the error to the planner and keep the
+      // controller enabled so it can choose a different target. Runtime
+      // state faults are handled by the checks above and still call stop().
+      finish(false,"sdk_rejected","Controller rejected command; replan the target");return;
      }
      // set_eeff is asynchronous on this controller: a negative SDK return
      // can mean the acknowledgement was not decoded even though execution
