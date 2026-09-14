@@ -1,1 +1,0 @@
-/home/yuxuan/astra_robot_control/skill/ros_ws/build/insight_camera/README.md

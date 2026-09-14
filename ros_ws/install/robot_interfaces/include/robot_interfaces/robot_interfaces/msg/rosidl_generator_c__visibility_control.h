@@ -1,1 +1,0 @@
-/home/yuxuan/astra_robot_control/skill/ros_ws/build/robot_interfaces/rosidl_generator_c/robot_interfaces/msg/rosidl_generator_c__visibility_control.h

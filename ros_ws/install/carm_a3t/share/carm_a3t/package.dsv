@@ -1,8 +1,0 @@
-source;share/carm_a3t/hook/cmake_prefix_path.ps1
-source;share/carm_a3t/hook/cmake_prefix_path.dsv
-source;share/carm_a3t/hook/cmake_prefix_path.sh
-source;share/carm_a3t/local_setup.bash
-source;share/carm_a3t/local_setup.dsv
-source;share/carm_a3t/local_setup.ps1
-source;share/carm_a3t/local_setup.sh
-source;share/carm_a3t/local_setup.zsh

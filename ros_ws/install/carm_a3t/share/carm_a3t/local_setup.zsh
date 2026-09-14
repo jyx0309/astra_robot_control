@@ -1,1 +1,0 @@
-/home/yuxuan/astra_robot_control/skill/ros_ws/build/carm_a3t/ament_cmake_environment_hooks/local_setup.zsh

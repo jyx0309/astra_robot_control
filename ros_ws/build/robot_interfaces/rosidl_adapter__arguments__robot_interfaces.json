@@ -1,7 +1,0 @@
-{
-  "package_name": "robot_interfaces",
-  "non_idl_tuples": [
-    "/home/yuxuan/astra_robot_control/skill/ros_ws/src/robot_interfaces:msg/RobotState.msg",
-    "/home/yuxuan/astra_robot_control/skill/ros_ws/src/robot_interfaces:action/ExecuteStep.action"
-  ]
-}

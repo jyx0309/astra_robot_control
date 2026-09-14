@@ -1,1 +1,0 @@
-/home/yuxuan/astra_robot_control/skill/ros_ws/src/insight_camera/launch/camera.launch.py

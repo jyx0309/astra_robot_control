@@ -1,1 +1,0 @@
-/home/yuxuan/astra_robot_control/skill/ros_ws/build/robot_interfaces/rosidl_typesupport_introspection_c/robot_interfaces/action/detail/execute_step__rosidl_typesupport_introspection_c.h

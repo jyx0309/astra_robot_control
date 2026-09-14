@@ -1,1 +1,0 @@
-/home/yuxuan/astra_robot_control/skill/ros_ws/build/robot_interfaces/rosidl_generator_cpp/robot_interfaces/action/execute_step.hpp

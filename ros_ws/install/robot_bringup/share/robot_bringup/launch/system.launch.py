@@ -1,1 +1,0 @@
-/home/yuxuan/astra_robot_control/skill/ros_ws/src/robot_bringup/launch/system.launch.py
