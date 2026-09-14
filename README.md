@@ -39,6 +39,75 @@ robot_execution 校验并调用 CARM SDK 执行
 
 使用 ROS 2 Jazzy 在 `ros_ws/` 中构建；启动真实后端时，明确传入 CARM 硬件参数。
 
+## 启动与执行
+
+首次使用或源码发生变化后，在项目目录构建：
+
+```bash
+cd /home/yuxuan/astra_robot_control/skill/ros_ws
+source /opt/ros/jazzy/setup.bash
+source vendor/arm_control_sdk/setup.bash
+colcon build --base-paths src --symlink-install
+source install/setup.bash
+```
+
+推荐使用一个 ROS 终端启动完整系统。默认使用 `mock` 后端，不会连接或使能真实机械臂：
+
+```bash
+cd /home/yuxuan/astra_robot_control/skill/ros_ws
+source /opt/ros/jazzy/setup.bash
+source install/setup.bash
+ros2 launch robot_bringup system.launch.py
+```
+
+真实硬件启动前，操作员必须确认工作区、急停、控制器、工具和夹爪配置。确认后启动 CARM 后端：
+
+```bash
+source vendor/arm_control_sdk/setup.bash
+ros2 launch robot_bringup system.launch.py \
+  backend:=carm \
+  robot_ip:=10.42.0.101 \
+  hardware_config_verified:=true
+```
+
+启动 bringup 不等于使能机械臂。操作员确认安全后，单独执行：
+
+```bash
+ros2 service call /robot/enable std_srvs/srv/Trigger "{}"
+```
+
+建议在另一个终端打开 Codex 任务，由 Codex 使用本技能执行闭环；不需要再次启动 bringup。启动后可用以下命令检查状态和获取观察：
+
+```bash
+./scripts/robot_status.sh
+./scripts/capture_observation.sh
+```
+
+单步动作必须等待结果并重新观察后才能执行下一步。例如夹爪动作：
+
+```bash
+./scripts/execute_step.sh set_gripper 0.03 2.0
+```
+
+移动动作的目标位姿为 `base_link` 下的绝对位姿，格式为 `[x y z qx qy qz qw]`：
+
+```bash
+./scripts/execute_step.sh move_to X Y Z QX QY QZ QW
+```
+
+任何时候需要停止时执行：
+
+```bash
+./scripts/stop_robot.sh
+```
+
+## 安全边界
+
+- 默认 `backend` 是 `mock`；真实硬件必须显式传入 `backend:=carm`。
+- 机械臂使能、首次运动和急停由操作员掌握；Codex 负责使能后的受限逐步闭环。
+- 每次动作完成后必须重新获取状态和三路图像，不能预先连续发送多个动作。
+- `robot_execution` 负责工作空间、步长、姿态、IK、超时和故障校验。
+
 ## 自主闭环策略
 
 Codex 运行时会在一个任务中执行有限轮次的观察/动作循环：每轮采集腕部 RGB、左红外和右红外图像，读取当前本体感知信息，选择一个绝对的 `base_link` 目标位姿，执行后再次采集。轮次之间不需要用户消息。该技能不规定固定的 5/10/20 mm 行为，也不把所选距离转换成位姿；审批器和 robot_execution 负责执行硬限制，并可能进行限幅或拒绝。
