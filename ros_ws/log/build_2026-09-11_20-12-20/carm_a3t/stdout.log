@@ -1,0 +1,68 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found rclcpp: 28.1.21 (/opt/ros/jazzy/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+-- Added test 'copyright' to check source files copyright and LICENSE
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Configured 'flake8' exclude dirs and/or files: 
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done (0.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/yuxuan/astra_robot_control/skill/ros_ws/build/carm_a3t
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//launch/display.launch.py
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//meshes/base_link.STL
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//meshes/gripper.STL
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//meshes/gripper_base.STL
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//meshes/gripper_left.STL
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//meshes/gripper_right.STL
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//meshes/link1.STL
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//meshes/link2.STL
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//meshes/link3.STL
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//meshes/link4.STL
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//meshes/link5.STL
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//meshes/link6.STL
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//meshes/payload.STL
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//urdf/carm_a3t.csv
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//urdf/carm_a3t.urdf
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t//urdf/default.rviz
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/ament_index/resource_index/package_run_dependencies/carm_a3t
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/ament_index/resource_index/parent_prefix_path/carm_a3t
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t/environment/ament_prefix_path.sh
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t/environment/ament_prefix_path.dsv
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t/environment/path.sh
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t/environment/path.dsv
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t/local_setup.bash
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t/local_setup.sh
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t/local_setup.zsh
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t/local_setup.dsv
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t/package.dsv
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/ament_index/resource_index/packages/carm_a3t
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t/cmake/carm_a3tConfig.cmake
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t/cmake/carm_a3tConfig-version.cmake
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/carm_a3t/share/carm_a3t/package.xml

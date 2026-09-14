@@ -1,0 +1,4 @@
+interface:
+  display_name: Astra Robot Control
+  short_description: 通过 ROS 2 操作和调试 Insight9 与 CARM
+  default_prompt: 检查机器人和相机状态，然后执行请求的安全 ROS 操作。

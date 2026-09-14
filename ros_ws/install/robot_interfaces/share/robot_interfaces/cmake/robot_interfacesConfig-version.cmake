@@ -1,0 +1,1 @@
+/home/yuxuan/astra_robot_control/skill/ros_ws/build/robot_interfaces/ament_cmake_core/robot_interfacesConfig-version.cmake

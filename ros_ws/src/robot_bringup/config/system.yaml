@@ -1,0 +1,7 @@
+robot_execution:
+  ros__parameters:
+    backend: mock
+    hardware_config_verified: false
+    max_translation_m: 0.20
+    max_rotation_rad: 0.35
+    workspace_bounds: [-0.8, 0.8, -0.8, 0.8, 0.02, 1.0]

@@ -1,0 +1,16 @@
+# A single serialized motion. All distances in meters, quaternion xyzw.
+string command_id
+string kind
+geometry_msgs/PoseStamped target
+float64 opening_m
+float64 force_n
+float64 timeout_sec
+---
+bool success
+string code
+string message
+robot_interfaces/RobotState state
+---
+string phase
+float64 elapsed_sec
+robot_interfaces/RobotState state

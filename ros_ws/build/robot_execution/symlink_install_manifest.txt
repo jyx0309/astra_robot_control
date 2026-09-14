@@ -1,0 +1,16 @@
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/lib/robot_execution/execution_node
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/ament_index/resource_index/package_run_dependencies/robot_execution
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/ament_index/resource_index/parent_prefix_path/robot_execution
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/environment/ament_prefix_path.sh
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/environment/ament_prefix_path.dsv
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/environment/path.sh
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/environment/path.dsv
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/local_setup.bash
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/local_setup.sh
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/local_setup.zsh
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/local_setup.dsv
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/package.dsv
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/ament_index/resource_index/packages/robot_execution
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/cmake/robot_executionConfig.cmake
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/cmake/robot_executionConfig-version.cmake
+/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/package.xml

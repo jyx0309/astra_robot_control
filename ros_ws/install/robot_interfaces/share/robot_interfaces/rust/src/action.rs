@@ -1,0 +1,1 @@
+/home/yuxuan/astra_robot_control/skill/ros_ws/build/robot_interfaces/rosidl_generator_rs/robot_interfaces/rust/src/action.rs

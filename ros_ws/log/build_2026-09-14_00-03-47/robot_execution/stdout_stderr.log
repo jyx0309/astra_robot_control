@@ -1,0 +1,26 @@
+[ 50%] Built target gtest_main
+[ 50%] Built target gtest
+[ 62%] Building CXX object CMakeFiles/execution_node.dir/src/execution_node.cpp.o
+[ 75%] Building CXX object CMakeFiles/test_validation.dir/test/test_validation.cpp.o
+[ 87%] Linking CXX executable test_validation
+[ 87%] Built target test_validation
+[100%] Linking CXX executable execution_node
+[100%] Built target execution_node
+-- Install configuration: ""
+-- Execute custom install script
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/lib/robot_execution/execution_node
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/ament_index/resource_index/package_run_dependencies/robot_execution
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/ament_index/resource_index/parent_prefix_path/robot_execution
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/environment/path.sh
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/environment/path.dsv
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/local_setup.bash
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/local_setup.sh
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/local_setup.zsh
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/local_setup.dsv
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/package.dsv
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/ament_index/resource_index/packages/robot_execution
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/cmake/robot_executionConfig.cmake
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/cmake/robot_executionConfig-version.cmake
+-- Up-to-date symlink: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/package.xml

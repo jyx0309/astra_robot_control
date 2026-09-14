@@ -1,0 +1,2 @@
+[console_scripts]
+observation_node = insight_camera.node:main

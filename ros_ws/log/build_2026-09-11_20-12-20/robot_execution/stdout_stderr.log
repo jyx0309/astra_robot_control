@@ -1,0 +1,67 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found rclcpp: 28.1.21 (/opt/ros/jazzy/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.9 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.4 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found rclcpp_action: 28.1.21 (/opt/ros/jazzy/share/rclcpp_action/cmake)
+-- Found robot_interfaces: 0.1.0 (/home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_interfaces/share/robot_interfaces/cmake)
+-- Found sensor_msgs: 5.3.8 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+-- Found std_srvs: 5.3.8 (/opt/ros/jazzy/share/std_srvs/cmake)
+-- Found ament_cmake_gtest: 2.5.6 (/opt/ros/jazzy/share/ament_cmake_gtest/cmake)
+-- Found gtest sources under '/opt/ros/jazzy/src/gtest_vendor': C++ tests using 'Google Test' will be built
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Configuring done (0.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/yuxuan/astra_robot_control/skill/ros_ws/build/robot_execution
+[ 37%] Building CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
+[ 37%] Building CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o
+[ 37%] Building CXX object CMakeFiles/execution_node.dir/src/execution_node.cpp.o
+[ 50%] Linking CXX static library libgtest_main.a
+[ 50%] Built target gtest_main
+[ 62%] Linking CXX static library libgtest.a
+[ 62%] Built target gtest
+[ 75%] Building CXX object CMakeFiles/test_validation.dir/test/test_validation.cpp.o
+[ 87%] Linking CXX executable test_validation
+[ 87%] Built target test_validation
+[100%] Linking CXX executable execution_node
+[100%] Built target execution_node
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/lib/robot_execution/execution_node
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/ament_index/resource_index/package_run_dependencies/robot_execution
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/ament_index/resource_index/parent_prefix_path/robot_execution
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/environment/ament_prefix_path.sh
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/environment/ament_prefix_path.dsv
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/environment/path.sh
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/environment/path.dsv
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/local_setup.bash
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/local_setup.sh
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/local_setup.zsh
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/local_setup.dsv
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/package.dsv
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/ament_index/resource_index/packages/robot_execution
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/cmake/robot_executionConfig.cmake
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/cmake/robot_executionConfig-version.cmake
+-- Symlinking: /home/yuxuan/astra_robot_control/skill/ros_ws/install/robot_execution/share/robot_execution/package.xml
