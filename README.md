@@ -51,7 +51,9 @@ colcon build --base-paths src --symlink-install
 source install/setup.bash
 ```
 
-推荐使用一个 ROS 终端启动完整系统。默认使用 `mock` 后端，不会连接或使能真实机械臂：
+### 终端 1：启动 ROS bringup
+
+默认使用 `mock` 后端，不会连接或使能真实机械臂：
 
 ```bash
 cd /path/to/astra_robot_control/ros_ws
@@ -60,7 +62,7 @@ source install/setup.bash
 ros2 launch robot_bringup system.launch.py
 ```
 
-真实硬件启动前，操作员必须确认工作区、急停、控制器、工具和夹爪配置。确认后启动 CARM 后端：
+真实硬件启动前，操作员必须确认工作区、急停、控制器、工具和夹爪配置。确认后，在终端 1 启动 CARM 后端：
 
 ```bash
 source vendor/arm_control_sdk/setup.bash
@@ -70,35 +72,75 @@ ros2 launch robot_bringup system.launch.py \
   hardware_config_verified:=true
 ```
 
-启动 bringup 不等于使能机械臂。操作员确认安全后，单独执行：
+### 终端 2：检查并人工使能
+
+`bringup` 只启动 ROS 节点，不会自动使能真实机械臂。打开第二个终端，加载同一个 ROS 工作区：
+
+```bash
+cd /path/to/astra_robot_control/ros_ws
+source /opt/ros/jazzy/setup.bash
+source install/setup.bash
+```
+
+检查节点和机器人状态：
+
+```bash
+../scripts/robot_status.sh
+```
+
+确认工作区安全、机器人连接正常且无故障后，才执行：
 
 ```bash
 ros2 service call /robot/enable std_srvs/srv/Trigger "{}"
 ```
 
-建议在另一个终端打开 Codex 任务，由 Codex 使用本技能执行闭环；不需要再次启动 bringup。启动后可用以下命令检查状态和获取观察：
+### Codex 会话：提交任务目标
+
+完成使能后，在项目目录打开 Codex 会话，并直接描述任务目标，例如：
+
+```text
+请抓取桌面上的红色手机，并把它抬升到安全高度。
+```
+
+或：
+
+```text
+请把相机视野中左侧的方形物体抓起来，放到右侧空白区域。
+```
+
+Codex 会使用本技能自动执行以下闭环，不需要用户手动逐条输入观察和动作命令：
+
+```text
+读取机器人状态和三路图像
+→ 选择一个受限的绝对末端目标
+→ 执行一个动作
+→ 等待动作结果
+→ 重新读取状态和图像
+→ 决定下一步
+```
+
+手动观察和动作命令只用于调试或验证接口：
 
 ```bash
-./scripts/robot_status.sh
-./scripts/capture_observation.sh
+../scripts/capture_observation.sh
 ```
 
 单步动作必须等待结果并重新观察后才能执行下一步。例如夹爪动作：
 
 ```bash
-./scripts/execute_step.sh set_gripper 0.03 2.0
+../scripts/execute_step.sh set_gripper 0.03 2.0
 ```
 
 移动动作的目标位姿为 `base_link` 下的绝对位姿，格式为 `[x y z qx qy qz qw]`：
 
 ```bash
-./scripts/execute_step.sh move_to X Y Z QX QY QZ QW
+../scripts/execute_step.sh move_to X Y Z QX QY QZ QW
 ```
 
 任何时候需要停止时执行：
 
 ```bash
-./scripts/stop_robot.sh
+../scripts/stop_robot.sh
 ```
 
 ## 安全边界
