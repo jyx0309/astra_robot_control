@@ -1,7 +1,7 @@
 # ROS 工作流
 
 ```bash
-cd /home/yuxuan/astra_robot_control/skill/ros_ws
+cd /path/to/astra_robot_control/ros_ws
 source /opt/ros/jazzy/setup.bash
 source vendor/arm_control_sdk/setup.bash
 source install/setup.bash

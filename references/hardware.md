@@ -14,7 +14,8 @@ ping -c 3 10.42.0.101
 确认控制器 IP 和端口后，才能启动 CARM 后端：
 
 ```bash
-source /home/yuxuan/astra_robot_control/skill/ros_ws/vendor/arm_control_sdk/setup.bash
+cd /path/to/astra_robot_control/ros_ws
+source vendor/arm_control_sdk/setup.bash
 ros2 run robot_execution execution_node --ros-args \
   -p backend:=carm -p robot_ip:=10.42.0.101 \
   -p hardware_config_verified:=true

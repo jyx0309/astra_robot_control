@@ -44,7 +44,7 @@ robot_execution 校验并调用 CARM SDK 执行
 首次使用或源码发生变化后，在项目目录构建：
 
 ```bash
-cd /home/yuxuan/astra_robot_control/skill/ros_ws
+cd /path/to/astra_robot_control/ros_ws
 source /opt/ros/jazzy/setup.bash
 source vendor/arm_control_sdk/setup.bash
 colcon build --base-paths src --symlink-install
@@ -54,7 +54,7 @@ source install/setup.bash
 推荐使用一个 ROS 终端启动完整系统。默认使用 `mock` 后端，不会连接或使能真实机械臂：
 
 ```bash
-cd /home/yuxuan/astra_robot_control/skill/ros_ws
+cd /path/to/astra_robot_control/ros_ws
 source /opt/ros/jazzy/setup.bash
 source install/setup.bash
 ros2 launch robot_bringup system.launch.py

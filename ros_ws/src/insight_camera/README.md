@@ -5,7 +5,7 @@
 ## 构建和启动（Ubuntu 24.04 / ROS 2 Jazzy）
 
 ```bash
-cd /home/yuxuan/astra_robot_control/skill/ros_ws
+cd /path/to/astra_robot_control/ros_ws
 source /opt/ros/jazzy/setup.bash
 colcon build --base-paths src --packages-select insight_camera --symlink-install
 source install/setup.bash
