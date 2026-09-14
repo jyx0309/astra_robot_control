@@ -36,11 +36,11 @@ robot_execution 校验并调用 CARM SDK 执行
 首次使用或源码发生变化后，在项目目录构建：
 
 ```bash
-cd /path/to/astra_robot_control/ros_ws
+cd /path/to/astra_robot_control
 source /opt/ros/jazzy/setup.bash
-source vendor/arm_control_sdk/setup.bash
-colcon build --base-paths src --symlink-install
-source install/setup.bash
+source ros_ws/vendor/arm_control_sdk/setup.bash
+colcon build --base-paths ros_ws/src --symlink-install --build-base ros_ws/build --install-base ros_ws/install
+source ros_ws/install/setup.bash
 ```
 
 ### 终端 1：启动 ROS bringup
@@ -48,16 +48,20 @@ source install/setup.bash
 默认使用 `mock` 后端，不会连接或使能真实机械臂：
 
 ```bash
-cd /path/to/astra_robot_control/ros_ws
+cd /path/to/astra_robot_control
 source /opt/ros/jazzy/setup.bash
-source install/setup.bash
+source ros_ws/vendor/arm_control_sdk/setup.bash
+source ros_ws/install/setup.bash
 ros2 launch robot_bringup system.launch.py
 ```
 
 真实硬件启动前，操作员必须确认工作区、急停、控制器、工具和夹爪配置。确认后，在终端 1 启动 CARM 后端：
 
 ```bash
-source vendor/arm_control_sdk/setup.bash
+cd /path/to/astra_robot_control
+source /opt/ros/jazzy/setup.bash
+source ros_ws/vendor/arm_control_sdk/setup.bash
+source ros_ws/install/setup.bash
 ros2 launch robot_bringup system.launch.py \
   backend:=carm \
   robot_ip:=10.42.0.101 \
@@ -68,11 +72,13 @@ ros2 launch robot_bringup system.launch.py \
 `speed_level` 的 SDK 范围是 `0~10`（约 `0%~100%`）。默认值为 `2.5`；如现场确认安全，可在启动时调高，最高为 `10`：
 
 ```bash
+cd /path/to/astra_robot_control && \
+source /opt/ros/jazzy/setup.bash && \
+source ros_ws/vendor/arm_control_sdk/setup.bash && \
+source ros_ws/install/setup.bash && \
 ros2 launch robot_bringup system.launch.py \
-  backend:=carm \
-  robot_ip:=10.42.0.101 \
-  hardware_config_verified:=true \
-  speed_level:=10.0
+  backend:=carm robot_ip:=10.42.0.101 \
+  hardware_config_verified:=true speed_level:=10.0
 ```
 
 `10.0` 是约 `100%` 速度，只适合在确认负载、工具、工作区和控制器配置后进行受控测试；普通抓取任务建议从 `2.5` 开始。
@@ -82,18 +88,15 @@ ros2 launch robot_bringup system.launch.py \
 `bringup` 只启动 ROS 节点，不会自动使能真实机械臂。打开第二个终端，加载同一个 ROS 工作区：
 
 ```bash
-cd /path/to/astra_robot_control/ros_ws
+cd /path/to/astra_robot_control
 source /opt/ros/jazzy/setup.bash
-source install/setup.bash
+source ros_ws/install/setup.bash
+./scripts/robot_status.sh
 ```
 
-检查节点和机器人状态：
+先确认上面 `robot_status.sh` 输出的连接、使能和故障状态，再执行使能命令。
 
-```bash
-../scripts/robot_status.sh
-```
-
-确认工作区安全、机器人连接正常且无故障后，才执行：
+确认工作区安全、机器人连接正常且无故障后，在同一终端执行：
 
 ```bash
 ros2 service call /robot/enable std_srvs/srv/Trigger "{}"
@@ -127,25 +130,25 @@ Codex 会使用本技能自动执行以下闭环，不需要用户手动逐条�
 手动观察和动作命令只用于调试或验证接口：
 
 ```bash
-../scripts/capture_observation.sh
+./scripts/capture_observation.sh
 ```
 
 单步动作必须等待结果并重新观察后才能执行下一步。例如夹爪动作：
 
 ```bash
-../scripts/execute_step.sh set_gripper 0.03 2.0
+./scripts/execute_step.sh set_gripper 0.03 2.0
 ```
 
 移动动作的目标位姿为 `base_link` 下的绝对位姿，格式为 `[x y z qx qy qz qw]`：
 
 ```bash
-../scripts/execute_step.sh move_to X Y Z QX QY QZ QW
+./scripts/execute_step.sh move_to X Y Z QX QY QZ QW
 ```
 
 任何时候需要停止时执行：
 
 ```bash
-../scripts/stop_robot.sh
+./scripts/stop_robot.sh
 ```
 
 ## 安全边界
