@@ -1,7 +1,0 @@
-[submodule "ros_ws/vendor/carm_demo"]
-	path = ros_ws/vendor/carm_demo
-	url = https://github.com/cvte-robotics/carm_demo.git
-
-[submodule "ros_ws/vendor/insight-sdk"]
-	path = ros_ws/vendor/insight-sdk
-	url = https://github.com/LooperRobotics/insight-sdk.git
