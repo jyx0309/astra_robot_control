@@ -1,0 +1,8 @@
+# ROS time boundary: frames must have source stamps strictly after this.
+builtin_interfaces/Time after
+---
+bool success
+string metadata_path
+string message
+float64 wait_sec
+float64 save_sec

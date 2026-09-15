@@ -4,7 +4,7 @@
   <description>用于机器人任务的 Insight9 ROS 原生图像观察。</description>
   <maintainer email="yuxuan@example.com">yuxuan</maintainer><license>Apache-2.0</license>
   <buildtool_depend>ament_python</buildtool_depend>
-  <exec_depend>rclpy</exec_depend><exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>rclpy</exec_depend><depend>robot_interfaces</depend><exec_depend>sensor_msgs</exec_depend>
   <exec_depend>std_srvs</exec_depend><exec_depend>cv_bridge</exec_depend>
   <exec_depend>python3-numpy</exec_depend><exec_depend>python3-opencv</exec_depend>
   <exec_depend>launch_ros</exec_depend><exec_depend>ament_index_python</exec_depend>

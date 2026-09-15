@@ -1,0 +1,20 @@
+{
+  "environment": "mock robot, synthetic 64x48 RGB/stereo, ROS_DOMAIN_ID=187",
+  "client_state_call_sec": [
+    0.0455159029997958,
+    0.049284809999790014,
+    0.03696013699982359
+  ],
+  "ros2_topic_echo_once_sec": [
+    1.2816477810001743,
+    1.2073074539998743,
+    1.154396343999906
+  ],
+  "sample_cycle_total_sec": 0.37117603000024246,
+  "sample_observation_timings": {
+    "capture_wait_sec": 8.814300008452847e-05,
+    "capture_save_sec": 0.0008765339998717536,
+    "observe_total_sec": 0.0023938829999679
+  },
+  "limitations": "These are local mock measurements, not real robot or camera speedups."
+}

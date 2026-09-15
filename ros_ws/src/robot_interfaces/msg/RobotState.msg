@@ -24,3 +24,22 @@ string active_command_id
 string fault
 # 当前关节位置列表。
 float64[] joint_positions
+# 原始伺服状态仅在 connected 和 state_valid 时可解释。
+bool servo_enabled
+int32 control_mode
+bool software_motion_enabled
+bool motion_allowed
+bool stationary
+float64 pose_age_sec
+float64 joint_age_sec
+float64[6] workspace_bounds
+float64 speed_level
+float64 max_opening_m
+float64 max_force_n
+# SDK Cartesian pose；历史字段 flange_pose 不保证是物理法兰或轴尖。
+string pose_reference
+int32 tool_index
+bool tool_transform_verified
+# 最近命令错误是诊断信息，不是持久硬故障。
+string last_command_error
+float64 sdk_refresh_ms

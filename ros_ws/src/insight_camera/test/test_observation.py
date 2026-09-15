@@ -15,6 +15,8 @@ class Image:
 
 def image(stamp):
     msg = Image()
+    msg.header = Header()
+    msg.header.stamp = Header.Stamp()
     msg.header.stamp.sec, msg.header.stamp.nanosec = divmod(stamp, 10**9)
     return msg
 
@@ -47,3 +49,9 @@ def test_observation_schema_is_three_images():
     }
     assert [view['file'] for view in metadata['views']] == [
         'left.png', 'right.png', 'rgb.png']
+
+
+def test_boundary_rejects_motion_frames_and_reuses_post_action_cache():
+    frames = {name: [image(100), image(200)] for name in ('left', 'right', 'rgb')}
+    assert choose_views(frames, 200, 5, ['left', 'right', 'rgb']) is None
+    assert choose_views(frames, 150, 5, ['left', 'right', 'rgb'])['rgb'].header.stamp.nanosec == 200

@@ -50,3 +50,9 @@ PYTHONPATH=src/insight_camera:$PYTHONPATH python3 -m pytest -q src/insight_camer
 ## 三图观察
 
 快照 `schema_version=3`，`views` 包含有序 `left/right/rgb` 的相对文件名、话题、`frame_id` 和时间戳。机器人状态与上一动作结果由上层 Codex 任务附加，不由相机节点推断。相机节点只负责采集和保存三路图像。
+
+## 时间基准适配
+
+`timestamp_mode=ros` 用于与主机同域的源时间；项目 camera.yaml 显式选择 `device` 以支持 Insight9 的设备运行时间。该模式保留原始 `stamp_ns`，将估算的主机 ROS 时间另存为 `association_stamp_ns`。估算基于持续数据中最小的到达减源时间偏移；检测重复、回退、明显跳变及相对积压，重新连接后需预热。它不能测出恒定传输延迟，不能当成硬件同步的曝光时间。三路图像仍按设备源时间及主机到达时间分别检查同步跨度。
+
+新快照 schema_version=4；新接口和恢复规则以 `references/ros_workflow.md` 为准。

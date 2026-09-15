@@ -10,6 +10,8 @@ bool success
 string code
 string message
 robot_interfaces/RobotState state
+float64 total_sec
+float64 sdk_submit_sec
 ---
 string phase
 float64 elapsed_sec

@@ -1,0 +1,17 @@
+string kind
+geometry_msgs/PoseStamped target
+float64 opening_m
+float64 force_n
+float64 timeout_sec
+# Optional SDK endpoint IK query; never executes motion.
+bool check_ik
+---
+bool valid
+string code
+string message
+robot_interfaces/RobotState state
+# True only when the optional endpoint IK query succeeded; path remains unchecked.
+bool ik_checked
+bool path_checked
+float64[] ik_joint_positions
+float64 check_sec

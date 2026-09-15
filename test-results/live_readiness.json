@@ -1,0 +1,115 @@
+{
+  "robot_state": {
+    "header": {
+      "stamp": {
+        "sec": 1789441386,
+        "nanosec": 223559431
+      },
+      "frame_id": "base_link"
+    },
+    "connected": true,
+    "enabled": true,
+    "busy": false,
+    "simulated": false,
+    "state_valid": true,
+    "flange_pose": {
+      "position": {
+        "x": 0.17955200374126434,
+        "y": 0.016374187543988228,
+        "z": 0.4316663444042206
+      },
+      "orientation": {
+        "x": 0.9263253211975098,
+        "y": 0.03485873341560364,
+        "z": 0.37121686339378357,
+        "w": -0.05389132723212242
+      }
+    },
+    "gripper_opening_m": 5.258933183329567e-05,
+    "gripper_force_n": -0.33091653689784534,
+    "controller_state": 1,
+    "active_command_id": "",
+    "fault": "",
+    "joint_positions": [
+      0.0711374282836914,
+      1.1126947402954102,
+      -0.9973678588867188,
+      0.6895170211791992,
+      -0.07686805725097656,
+      0.02689361572265625
+    ],
+    "servo_enabled": true,
+    "control_mode": 1,
+    "software_motion_enabled": true,
+    "motion_allowed": true,
+    "stationary": true,
+    "pose_age_sec": 0.018576109,
+    "joint_age_sec": 0.018585763,
+    "workspace_bounds": [
+      -0.8,
+      0.8,
+      -0.8,
+      0.8,
+      0.02,
+      1.0
+    ],
+    "speed_level": 2.5,
+    "max_opening_m": 0.074,
+    "max_force_n": 10.0,
+    "pose_reference": "sdk_cartesian_active_tool_unverified",
+    "tool_index": 1,
+    "tool_transform_verified": false,
+    "last_command_error": "",
+    "sdk_refresh_ms": 0.044466
+  },
+  "observations": [
+    {
+      "code": "observed",
+      "observation_valid": true,
+      "metadata_path": "/home/yuxuan/insight_captures/0ac87ac481f945fab4b88ad6bb283d3c/metadata.json",
+      "state_delta_sec": {
+        "left": 0.019748769,
+        "right": 0.019748769,
+        "rgb": 0.022404556
+      },
+      "timings": {
+        "capture_wait_sec": 0.00010887099961109925,
+        "capture_save_sec": 0.13847326500035706,
+        "observe_total_sec": 0.1414432130000023
+      }
+    },
+    {
+      "code": "observed",
+      "observation_valid": true,
+      "metadata_path": "/home/yuxuan/insight_captures/ae86e372c3c54181bbb6da8e7675cb9a/metadata.json",
+      "state_delta_sec": {
+        "left": 0.019633163,
+        "right": 0.019633163,
+        "rgb": 0.005823268
+      },
+      "timings": {
+        "capture_wait_sec": 0.00010037999982159818,
+        "capture_save_sec": 0.11496711899962975,
+        "observe_total_sec": 0.11774792999995043
+      }
+    },
+    {
+      "code": "observed",
+      "observation_valid": true,
+      "metadata_path": "/home/yuxuan/insight_captures/6ea6a89d96e34dd18a2478c91f2d83b8/metadata.json",
+      "state_delta_sec": {
+        "left": 0.019633037,
+        "right": 0.019633037,
+        "rgb": 0.010625954
+      },
+      "timings": {
+        "capture_wait_sec": 0.00022220899973035557,
+        "capture_save_sec": 0.1304678410001543,
+        "observe_total_sec": 0.1332534440002746
+      }
+    }
+  ],
+  "motion_commands_sent": 0,
+  "timestamp_mode": "device",
+  "constant_transport_latency_known": false
+}

@@ -151,10 +151,57 @@ Codex 会使用本技能自动执行以下闭环，不需要用户手动逐条�
 ./scripts/stop_robot.sh
 ```
 
+## 记录推理画面和文字
+
+`scripts/record_inference.py` 使用 Python 3 标准库，保存每次送给模型的观察图像、显式决策摘要、可选状态及动作结果，并生成本地 HTML 回放。它不会自动抓取聊天或模型内部隐藏思维，也不是相机连续视频录像；每一步文字由调用方明确写入。记录程序不会控制机械臂。
+
+在本 README 所在目录创建会话：
+
+```bash
+python3 scripts/record_inference.py init recordings/demo --task '抓取目标物体'
+```
+
+每次采集并查看图像后，使用相机返回的实际元数据路径记录本轮决策：
+
+```bash
+python3 scripts/record_inference.py add recordings/demo \
+  --observation /实际观察目录/metadata.json \
+  --summary '目标位于画面中央，下一步调整夹爪对准目标。'
+```
+
+命令输出唯一步骤编号。长文本可用 `--summary-file decision.txt` 传入；`--state-file state.txt` 和 `--action-file action.txt` 可附加当轮真实状态及计划动作。文件均按 UTF-8 保存原文。
+
+动作完成后，将实际返回结果写入文件，再关联到刚才的步骤：
+
+```bash
+python3 scripts/record_inference.py result recordings/demo 实际步骤编号 \
+  --result-file action_result.txt
+```
+
+直接在浏览器打开 `recordings/demo/index.html` 即可查看三路图像、决策摘要、状态及结果。每次写入自动更新页面，刷新可看新增步骤；`export recordings/demo` 可重建页面。缺失的状态和结果显示“未记录”。
+
+每步保存独立 `record.json`、图片副本和原始 `source_metadata.json`，整个会话目录可复制回放。相机时间保留为原始 `stamp_ns`，文字及结果记录时间使用 UTC，并非模型推理起止时间。归档图片路径以 `record.json` 为准，原始元数据保持不变。
+
+后续可直接对 Codex 说：“执行任务，并把每次观察、决策摘要和动作结果记录到 recordings/本次任务。”目前已完成离线验证，尚未验证真实机械臂上的记录流程。
+
+### 直接导出 MP4
+
+```bash
+python3 scripts/record_inference.py video recordings/demo
+```
+
+输出为会话目录内的 `replay.mp4`：1280×720、10 fps、三路图像并排显示，中文决策摘要直接绘制到画面，无音轨。默认每步停留 3 秒；长摘要自动分页，每页 3 秒，不会截断。可用 `--seconds 5` 调整每页时长。视频是观察帧回放，不代表真实动作耗时；状态和完整动作结果仍保留在网页与 JSON 中。
+
+视频导出需要 Pillow、numpy、OpenCV 和中文字体；当前环境已具备。默认字体为 `/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc`，可通过 `--font` 指定。采用 MP4V 编码，需要支持此编码的播放器。重新导出会原子替换当前会话的 `replay.mp4`；失败时保留原视频。
+
+原始相机图片当前保存在 `/home/yuxuan/insight_captures/<观察编号>/`。使用上面的相对路径示例且在本技能目录执行时，归档位于 `/home/yuxuan/astra_robot_control/skill/recordings/demo/`；其中 `steps/` 保存图像与文字，`index.html` 为网页回放，`replay.mp4` 为视频。记录目录已加入 Git 忽略列表。
+
 ## 安全边界
 
 - 默认 `backend` 是 `mock`；真实硬件必须显式传入 `backend:=carm`。
 - 机械臂使能、首次运动和急停由操作员掌握；Codex 负责使能后的受限逐步闭环。
 - 每次动作完成后必须重新获取状态和三路图像，不能预先连续发送多个动作。
-- `robot_execution` 负责工作空间、步长、姿态、IK、超时和故障校验。
-- 单个目标被 SDK/IK 拒绝时返回 `sdk_rejected`，Codex 应根据当前状态重新规划目标，不需要自动急停或重新使能；运行中状态故障、碰撞、超时或取消才会触发停止流程。
+- `robot_execution` 负责工作空间、姿态、IK、超时和故障校验；不设置固定平移/旋转步长。
+- 已确认的 IK 拒绝返回 `ik_rejected`，重新观察和规划；不急停或重新使能。SDK 返回值不明时继续监测实际执行，通信超时须查询原动作，不能盲目重发。真实故障、运动超时或取消仍执行停止流程。
+
+常驻客户端、失败恢复和最新接口见 [ROS 工作流](references/ros_workflow.md)。常规循环优先使用该入口，避免每轮启动多个 ROS CLI。
